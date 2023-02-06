@@ -1,10 +1,10 @@
 export class Permission {
     action: string
-    private callback: (user: any, subject: any) => boolean
+    private callback: (((user: any, subject: any) => boolean) | boolean)
 
     constructor(
         action: string,
-        callback: (user: any, subject: any) => boolean = () => false
+        callback: (((user: any, subject: any) => boolean) | boolean)
     ) {
         this.action = action
         this.callback = callback
@@ -17,6 +17,9 @@ export class Permission {
      * @returns boolean
      */
     check(user: any, subject: any): boolean {
+        if (typeof this.callback === 'boolean') {
+            return this.callback
+        }
         return this.callback(user, subject)
     }
 }

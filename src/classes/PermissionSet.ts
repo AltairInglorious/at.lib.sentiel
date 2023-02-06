@@ -13,7 +13,7 @@ export class PermissionSet {
         }
     }
 
-    setPermission(action: string, callback: (user: any, subject: any) => boolean) {
+    setPermission(action: string, callback: (((user: any, subject: any) => boolean)) | boolean) {
         this.permissions.push(new Permission(action, callback))
     }
 
