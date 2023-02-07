@@ -1,3 +1,5 @@
+import { Condition } from "../types";
+
 export interface IPermissions {
-    [key: string]: ((user: any, subject: any) => boolean) | boolean
+    [key: string]: Condition
 }

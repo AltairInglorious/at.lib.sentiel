@@ -1,10 +1,17 @@
+import { Condition } from "../types"
+
 export class Permission {
     action: string
-    private callback: (((user: any, subject: any) => boolean) | boolean)
+    private callback: Condition
 
+    /**
+     * 
+     * @param action action type
+     * @param callback check condition
+     */
     constructor(
         action: string,
-        callback: (((user: any, subject: any) => boolean) | boolean)
+        callback: Condition
     ) {
         this.action = action
         this.callback = callback
@@ -16,7 +23,7 @@ export class Permission {
      * @param subject Subject object
      * @returns boolean
      */
-    check(user: any, subject: any): boolean {
+    can(user: any, subject: any): boolean {
         if (typeof this.callback === 'boolean') {
             return this.callback
         }
